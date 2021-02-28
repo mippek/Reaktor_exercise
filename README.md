@@ -5,3 +5,6 @@ If the application has just been started it may take a couple of minutes for it 
 In this case it only shows an empty table.
 The page must always be refreshed to see the newest fetched data from the API.
 Otherwise, it should be fast to switch between pages.
+
+The application is runnin at Heroku at:
+https://cliffsclothes.herokuapp.com/
