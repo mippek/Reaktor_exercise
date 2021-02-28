@@ -1,3 +1,4 @@
+import { fetchCachedProductData } from "../../services/productService.js";
 
 /* Cache that is used for data that is shown on the web page. */
 let workerProductCache = {};
@@ -14,6 +15,11 @@ worker.onmessage = (event) => {
 
 /* Requests to the main page, route '/', are redirected to the path '/gloves'. */
 const hello = async({response}) => {
+    if (!(workerProductCache["gloves"] && workerProductCache["facemasks"] && workerProductCache["beanies"])) {
+        await fetchCachedProductData("gloves");
+        await fetchCachedProductData("facemasks");
+        await fetchCachedProductData("beanies");
+    }
     response.redirect('/gloves');
 }
 
