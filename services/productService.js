@@ -13,7 +13,7 @@ const fetchAvailabilityData = async (manufacturer) => {
     try {
         const response = await fetch(`${baseUrl}/availability/${manufacturer}`);
         if (!response.ok) {
-            throw new Error('Response was not ok');
+            return {response: "[]"};
         }
         return response.json();
     } catch (e) {
@@ -52,9 +52,13 @@ const fetchCachedAvailabilityData = async (manufacturer) => {
  * or if the response was not ok throws a new error. */
 const fetchProductData = async (product) => {
     try {
-        const response = await fetch(`${baseUrl}/products/${product}`);
+        const response = await fetch(`${baseUrl}/products/${product}`, {
+            headers: {
+
+            }
+        });
         if (!response.ok) {
-            throw new Error('Response was not ok');
+            return [];
         }
         return response.json();
     } catch (e) {
@@ -74,28 +78,30 @@ const fetchCachedProductData = async (product) => {
     /* Products with availabilities are stored in a list. */
     const data = [];
     const products = await fetchProductData(product);
-    for (const product of products) {
-        /* For each product fetches the availability data for the manufacturer of the product. */
-        const availability = await fetchCachedAvailabilityData(product.manufacturer);
-        if (availability !== '[]') {
-            /* If the availabilities for the product manufacturer contains some information i.e. is
-             * not an empty list, [], filters the availability information by id to contain only the
-             * the information of the product in question. */
-            const filteredAvailability = availability.filter( o => o.id.toLowerCase() === product.id)
-            /* Parses the DATAPAYLOAD of the availability information. */
-            const parsedAvailability = parseAvailabilityData(filteredAvailability[0].DATAPAYLOAD)
-            /* Adds the availability information to the object and pushes it to the list. */
-            const obj = { ...product, availability: parsedAvailability };
-            data.push(obj);
-        } else {
-            /* If the availability information contains an empty list, returns '-' for the availability
-             * to tell that the availability information was not available. */
-            const obj = { ...product, availability: "-" };
-            data.push(obj);
+    if (products) {
+        for (const product of products) {
+            /* For each product fetches the availability data for the manufacturer of the product. */
+            const availability = await fetchCachedAvailabilityData(product.manufacturer);
+            if (availability !== '[]') {
+                /* If the availabilities for the product manufacturer contains some information i.e. is
+                * not an empty list, [], filters the availability information by id to contain only the
+                * the information of the product in question. */
+                const filteredAvailability = availability.filter( o => o.id.toLowerCase() === product.id)
+                /* Parses the DATAPAYLOAD of the availability information. */
+                const parsedAvailability = parseAvailabilityData(filteredAvailability[0].DATAPAYLOAD)
+                /* Adds the availability information to the object and pushes it to the list. */
+                const obj = { ...product, availability: parsedAvailability };
+                data.push(obj);
+            } else {
+                /* If the availability information contains an empty list, returns '-' for the availability
+                * to tell that the availability information was not available. */
+                const obj = { ...product, availability: "-" };
+                data.push(obj);
+            }
         }
+        productCache[product] = data;
     }
 
-    productCache[product] = data;
     /* Returns the list of products with availabilities. */
     return data;
 }
