@@ -14,3 +14,7 @@ const refreshData = async() => {
 setInterval(() => {
     refreshData();
 }, 5 * 60 * 1000);
+
+self.onmessage = async () => {
+    await refreshData();
+}

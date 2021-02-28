@@ -16,9 +16,7 @@ worker.onmessage = (event) => {
 /* Requests to the main page, route '/', are redirected to the path '/gloves'. */
 const hello = async({response}) => {
     if (!(workerProductCache["gloves"] && workerProductCache["facemasks"] && workerProductCache["beanies"])) {
-        await fetchCachedProductData("gloves");
-        await fetchCachedProductData("facemasks");
-        await fetchCachedProductData("beanies");
+        worker.postMessage("");
     }
     response.redirect('/gloves');
 }
