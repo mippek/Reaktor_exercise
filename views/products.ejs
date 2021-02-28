@@ -1,0 +1,41 @@
+<%- include('./partials/header.ejs') %>
+
+<!-- Table for displaying product data -->
+<div class="tbl-container">
+  <table>
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Manufacturer</th>
+        <th>Price</th>
+        <th>Color</th>
+        <th>Availability</th>
+      </tr>
+    </thead>
+  
+    <tbody>
+      <!-- Only shows data if the list of products is not empty -->
+      <% if (data) { %>
+        <!-- Loops through all products -->
+        <% for (const item of data) { %>
+          <tr>
+            <td><%= item.id %></td>
+            <td><%= item.name %></td>
+            <td><%= item.manufacturer %></td>
+            <td><%= item.price %></td>
+            <td>
+              <!-- Loops through all colors -->
+              <% for (const color of item.color) { %>
+                <%= color %>
+              <% } %>
+            </td>
+            <td><%= item.availability %></td>
+          </tr>
+        <% } %>
+      <% } %>
+    </tbody>
+  </table>
+</div>
+
+<%- include('./partials/footer.ejs') %>

@@ -1,0 +1,106 @@
+body {
+    font-family: 'lato', sans-serif;
+}
+
+img {
+    display: block;
+    height: 100px;
+    margin-top: 50px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.container {
+    width: 80%;
+    margin-bottom: 50px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Navigation bar */
+.navbar {
+    margin-top: 20px;
+    margin-bottom: 0;
+}
+  
+.navbar ul {
+    list-style-type: none;
+    overflow: hidden;
+    background-color: #e9ecef;
+    border-radius: 5px;
+    padding: 0;
+    margin: 0;
+}
+  
+.navbar li {
+    float: left;
+    margin-bottom: 0;
+}
+  
+.navbar li a {
+    display: block;
+    color: black;
+    text-align: center;
+    font-size: 14px;
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
+    text-decoration: none;
+    padding: 20px;
+}
+
+.navbar li a.active {
+    background-color: #f9e6e6;
+}
+  
+.navbar li a:hover {
+    background-color: #f9f6f7;
+}
+
+
+/* Table for listing products */
+.tbl-container {
+    width: 99%;
+    height:500px;
+    overflow-y: scroll;
+    flex-grow: 1;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.tbl-container th {
+    position: sticky;
+    top: 0;
+    padding: 20px 10px 20px 10px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+thead {
+    box-shadow: 0px 1px 5px 0px #e9ecef;
+}
+
+td, th {
+    text-align: center;
+    padding: 10px;
+}
+  
+th {
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+    font-weight: 500;
+    background-color: #f9f6f7;
+}
+
+td {
+    color: black;
+    font-weight: 500;
+    font-size: 12px;
+    border-bottom: solid 1px #e9ecef;
+    padding: 20px 5px 20px 5px;
+}
+
+      
