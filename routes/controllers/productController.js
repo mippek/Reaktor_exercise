@@ -1,4 +1,3 @@
-import { fetchCachedProductData } from "../../services/productService.js";
 
 /* Cache that is used for data that is shown on the web page. */
 let workerProductCache = {};
