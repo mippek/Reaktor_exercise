@@ -60,7 +60,7 @@ img {
 /* Table for listing products */
 .tbl-container {
     width: 99%;
-    height:500px;
+    max-height:500px;
     overflow-y: scroll;
     flex-grow: 1;
     margin-left: auto;
@@ -101,6 +101,12 @@ td {
     font-size: 12px;
     border-bottom: solid 1px #e9ecef;
     padding: 20px 5px 20px 5px;
+}
+
+/* Load text */
+h2 {
+    letter-spacing: 0.03em;
+    font-weight: 500;
 }
 
       

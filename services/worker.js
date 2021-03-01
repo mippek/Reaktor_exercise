@@ -15,6 +15,9 @@ setInterval(() => {
     refreshData();
 }, 5 * 60 * 1000);
 
-self.onmessage = async () => {
+/* When the worker receives a message it calls on refreshData to fetch the data and returns an empty string
+ * to the main thread when the data has been fetched to show on screen that data has already been fetched. */
+self.onmessage = async (event) => {
     await refreshData();
+    postMessage("");
 }
